@@ -1,0 +1,46 @@
+imports:
+  - { resource: ../parameters_dev.yaml }
+
+doctrine:
+  dbal:
+    driver: 'pdo_pgsql'
+    server_version: '9.6'
+    charset: utf8
+    default_table_options:
+      charset: utf8
+      collate: utf8_unicode_ci
+    url: '%app.database.url%'
+  orm:
+    dql:
+      datetime_functions:
+        date_format: App\Doctrine\Functions\DateFormat
+        date_part: App\Doctrine\Functions\DatePart
+        date_add: App\Doctrine\Functions\DateAdd
+        date_sub: App\Doctrine\Functions\DateSub
+      string_functions:
+        RANDOM: App\Doctrine\Functions\Random
+        CONTAINS: App\Doctrine\Functions\Contains
+        CONTAINS_FIELD: App\Doctrine\Functions\ContainsField
+        LEVENSHTEIN: App\Doctrine\Functions\Levenshtein
+        ARRAY_AGG: App\Doctrine\Functions\ArrayAgg
+        jsonb_array_length: App\Doctrine\Functions\JsonbArrayLength
+        AS_INT: App\Doctrine\Functions\AsInt
+    auto_generate_proxy_classes: '%kernel.debug%'
+    naming_strategy: doctrine.orm.naming_strategy.underscore
+    auto_mapping: true
+    hydrators:
+      TransformHydrator: App\Doctrine\Hydration\TransformHydrator
+      GroupHydrator: App\Doctrine\Hydration\GroupHydrator
+      ListHydrator: App\Doctrine\Hydration\ListHydrator
+      IdHydrator: App\Doctrine\Hydration\IdHydrator
+    mappings:
+      App:
+        is_bundle: false
+        type: attribute
+        dir: '%kernel.project_dir%/src/Domain/Entity'
+        prefix: 'App\Domain\Entity'
+        alias: App
+
+doctrine_migrations:
+  migrations_paths:
+    'DoctrineMigrations': '%kernel.project_dir%/migrations'

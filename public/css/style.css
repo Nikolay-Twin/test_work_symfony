@@ -1,0 +1,28 @@
+
+#content {
+    padding: 20px;
+}
+
+#form {
+    border: 1px solid;
+    padding: 10px;
+    background-color: #c6f3f3;
+    width: 30%;
+}
+
+label {
+    display: block;
+    margin-top: 10px;
+}
+
+button {
+    margin-top: 10px;
+}
+
+#form_success {
+    color: blue;
+}
+
+#form_errors {
+    color: red;
+}
